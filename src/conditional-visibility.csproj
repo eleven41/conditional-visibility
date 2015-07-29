@@ -57,15 +57,17 @@
     <Reference Include="System.EnterpriseServices" />
   </ItemGroup>
   <ItemGroup>
+    <Content Include="conditional-visibility.min.js.map">
+      <DependentUpon>conditional-visibility.min.js</DependentUpon>
+    </Content>
+    <None Include="Scripts\jquery-2.1.4.intellisense.js" />
     <Content Include="conditional-visibility.min.js">
       <DependentUpon>conditional-visibility.js</DependentUpon>
     </Content>
-    <Content Include="conditional-visibility.min.js.map">
-      <DependentUpon>conditional-visibility.js</DependentUpon>
-    </Content>
-    <Content Include="packages.config">
-      <SubType>Designer</SubType>
-    </Content>
+    <Content Include="Scripts\jquery-2.1.4.js" />
+    <Content Include="Scripts\jquery-2.1.4.min.js" />
+    <Content Include="Scripts\jquery-2.1.4.min.map" />
+    <Content Include="packages.config" />
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>
@@ -76,9 +78,6 @@
   <ItemGroup>
     <Content Include="conditional-visibility.js" />
     <Content Include="Index.html" />
-    <None Include="Scripts\jquery-1.6.1-vsdoc.js" />
-    <Content Include="Scripts\jquery-1.6.1.js" />
-    <Content Include="Scripts\jquery-1.6.1.min.js" />
     <Content Include="Web.config" />
   </ItemGroup>
   <ItemGroup>

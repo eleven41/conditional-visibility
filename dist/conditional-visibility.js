@@ -51,15 +51,10 @@ ConditionalVisibility.init = function() {
 			var inputType = target.attr('type');
 			if (inputType == 'checkbox') {
 
-				var visibleValue = self.attr('data-visibility-value');
-				if (visibleValue == null) {
-					visibleValue = 'checked';
-				}
-
 				// When the target changes
 				var callback = function () {
-					var value = target.attr('checked');
-					if (value == visibleValue) {
+					var isChecked = target.is(':checked');
+					if (isChecked) {
 						if (action == 'show') {
 							self.show();
 						} else if (action == 'hide') {
