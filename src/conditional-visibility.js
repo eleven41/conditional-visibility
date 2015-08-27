@@ -4,7 +4,7 @@
 //
 // data-visibility-target="..." - ID of the control upon which this controls visibility depends
 // data-visibility-action="show|hide" - Whether to show or hide, default is to show
-// data-visibility-value="..." - Value upon which to show (or hide) the control
+// data-visibility-value="..." - Comma-separated list of values upon which to show (or hide) the control
 
 var ConditionalVisibility = ConditionalVisibility || {}
 
@@ -22,27 +22,35 @@ ConditionalVisibility.init = function() {
 
 		if (tagType == 'SELECT') {
 
-			var visibleValue = self.attr('data-visibility-value');
-			if (visibleValue == null) {
-				visibleValue = '';
+			var valueField = self.attr('data-visibility-value');
+			if (valueField == null) {
+			    valueField = '';
 			}
+			var visibleValues = valueField.split(',');
 
 			// When the target changes
 			var callback = function () {
-				var value = target.val().toString();
-				if (value == visibleValue) {
-					if (action == 'show') {
-						self.show();
-					} else if (action == 'hide') {
-						self.hide();
-					}
-				} else {
-					if (action == 'show') {
-						self.hide();
-					} else if (action == 'hide') {
-						self.show();
-					}
-				}
+			    var value = target.val().toString();
+			    for (var i = 0; i < visibleValues.length; ++i) {
+			        var visibleValue = visibleValues[i];
+			        if (value == visibleValue) {
+			            // A valid value was found.
+			            if (action == 'show') {
+			                self.show();
+			            } else if (action == 'hide') {
+			                self.hide();
+			            }
+
+			            return;
+			        }
+			    }
+
+                // IF we get here, then a valid value was not found
+			    if (action == 'show') {
+			        self.hide();
+			    } else if (action == 'hide') {
+			        self.show();
+			    }
 			};
 
 			target.change(callback);

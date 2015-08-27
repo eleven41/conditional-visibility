@@ -7,7 +7,7 @@
 
     <form>
 
-        <h2>Select Example</h2>
+        <h2>Single Show Example</h2>
 
         <select id="Show1">
             <option value="true">Show</option>
@@ -19,11 +19,24 @@
             This div is now showing because of the select.
         </div>
 
+		<h2>Multiple Show Example</h2>
+
+		<select id="Show2">
+			<option value="value1">Show 1</option>
+			<option value="value2">Show 2</option>
+			<option value="value3">Hide</option>
+		</select>
+
+		<div data-visibility-target="Show2"
+			 data-visibility-value="value1,value2">
+			This div is now showing because of the select.
+		</div>
+
         <h2>Checkbox Example</h2>
 
-        <input type="checkbox" id="Show2" /> Show
+        <input type="checkbox" id="Show3" /> Show
 
-        <div data-visibility-target="Show2">
+        <div data-visibility-target="Show3">
             This div is now showing because of the checkbox.
         </div>
     </form>
