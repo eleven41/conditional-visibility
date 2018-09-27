@@ -2,14 +2,14 @@
 <package >
   <metadata>
     <id>conditional-visibility</id>
-    <version>1.2.0</version>
+    <version>1.3.0</version>
     <authors>eleven41</authors>
     <owners>eleven41</owners>
     <projectUrl>https://github.com/eleven41/conditional-visibility</projectUrl>
 		<licenseUrl>https://github.com/eleven41/conditional-visibility/blob/master/LICENSE</licenseUrl>
     <requireLicenseAcceptance>false</requireLicenseAcceptance>
     <description>Javascript library to set the visibility of HTML controls based on values in other controls.</description>
-    <copyright>Copyright (C) 2015, Eleven41 Software Inc.</copyright>
+    <copyright>Copyright (C) 2018, Eleven41 Software Inc.</copyright>
     <dependencies>
         <dependency id="jQuery" version="2.0.0" />
     </dependencies>

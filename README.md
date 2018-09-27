@@ -1,6 +1,6 @@
 # conditional-visibility
 
-Copyright (C) 2015, Eleven41 Software Inc.
+Copyright (C) 2018, Eleven41 Software Inc.
 
 Javascript library to set the visibility of HTML controls based on values of other controls.
 

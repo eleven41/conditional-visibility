@@ -1,90 +1,99 @@
-﻿// conditional-visibility.js 1.0.0
+﻿// conditional-visibility.js 1.3.0
 //
-// Copyright (C) 2014, Eleven41 Software Inc.
+// Copyright (C) 2018, Eleven41 Software Inc.
 //
 // data-visibility-target="..." - ID of the control upon which this controls visibility depends
 // data-visibility-action="show|hide" - Whether to show or hide, default is to show
 // data-visibility-value="..." - Comma-separated list of values upon which to show (or hide) the control
 
-var ConditionalVisibility = ConditionalVisibility || {}
+var ConditionalVisibility = ConditionalVisibility || {};
 
-ConditionalVisibility.init = function() {
-	$("[data-visibility-target]").each(function () {
-		var self = $(this);
-		var targetId = self.attr('data-visibility-target');
-		var target = $('#' + targetId);
-		var tagType = target.prop("tagName");
+// Primary initialization function that will find all
+// elements that want conditional visibility and 
+// set visibility on them.
+ConditionalVisibility.init = function () {
+    $("[data-visibility-target]").each(function () {
+        var self = $(this);
+        ConditionalVisibility.setVisibility(self);
+    });
+};
 
-		var action = self.attr('data-visibility-action');
-		if (action == '' || action == null) {
-			action = 'show';
-		}
+// Sets visibility on a single element object.
+ConditionalVisibility.setVisibility = function (self) {
 
-		if (tagType == 'SELECT') {
+    var targetId = self.attr('data-visibility-target');
+    var target = $('#' + targetId);
+    var tagType = target.prop("tagName");
 
-			var valueField = self.attr('data-visibility-value');
-			if (valueField == null) {
-			    valueField = '';
-			}
-			var visibleValues = valueField.split(',');
+    var action = self.attr('data-visibility-action');
+    if (action === '' || action == null) {
+        action = 'show';
+    }
 
-			// When the target changes
-			var callback = function () {
-			    var value = target.val().toString();
-			    for (var i = 0; i < visibleValues.length; ++i) {
-			        var visibleValue = visibleValues[i];
-			        if (value == visibleValue) {
-			            // A valid value was found.
-			            if (action == 'show') {
-			                self.show();
-			            } else if (action == 'hide') {
-			                self.hide();
-			            }
+    if (tagType === 'SELECT') {
 
-			            return;
-			        }
-			    }
+        var valueField = self.attr('data-visibility-value');
+        if (valueField == null) {
+            valueField = '';
+        }
+        var visibleValues = valueField.split(',');
 
-                // IF we get here, then a valid value was not found
-			    if (action == 'show') {
-			        self.hide();
-			    } else if (action == 'hide') {
-			        self.show();
-			    }
-			};
+        // When the target changes
+        var callback = function () {
+            var value = target.val().toString();
+            for (var i = 0; i < visibleValues.length; ++i) {
+                var visibleValue = visibleValues[i];
+                if (value === visibleValue) {
+                    // A valid value was found.
+                    if (action === 'show') {
+                        self.show();
+                    } else if (action === 'hide') {
+                        self.hide();
+                    }
 
-			target.change(callback);
-			callback();
-		} else if (tagType == 'INPUT') {
-			var inputType = target.attr('type');
-			if (inputType == 'checkbox') {
+                    return;
+                }
+            }
 
-				// When the target changes
-				var callback = function () {
-					var isChecked = target.is(':checked');
-					if (isChecked) {
-						if (action == 'show') {
-							self.show();
-						} else if (action == 'hide') {
-							self.hide();
-						}
-					} else {
-						if (action == 'show') {
-							self.hide();
-						} else if (action == 'hide') {
-							self.show();
-						}
-					}
-				};
+            // IF we get here, then a valid value was not found
+            if (action === 'show') {
+                self.hide();
+            } else if (action === 'hide') {
+                self.show();
+            }
+        };
 
-				target.click(callback);
-				callback();
-			}
-		}
-	});
-}
+        target.change(callback);
+        callback();
+    } else if (tagType === 'INPUT') {
+        var inputType = target.attr('type');
+        if (inputType === 'checkbox') {
+
+            // When the target changes
+            var callback = function () {
+                var isChecked = target.is(':checked');
+                if (isChecked) {
+                    if (action === 'show') {
+                        self.show();
+                    } else if (action === 'hide') {
+                        self.hide();
+                    }
+                } else {
+                    if (action === 'show') {
+                        self.hide();
+                    } else if (action === 'hide') {
+                        self.show();
+                    }
+                }
+            };
+
+            target.click(callback);
+            callback();
+        }
+    }
+};
 
 // When the document is ready, initialize the conditional visibility
 $(document).ready(function () {
-	ConditionalVisibility.init();
+    ConditionalVisibility.init();
 });
